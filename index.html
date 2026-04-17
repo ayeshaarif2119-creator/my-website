@@ -1,483 +1,73 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Affiliate Deals - Best Products on Amazon</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
-        }
-
-        /* Header */
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-menu a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: opacity 0.3s;
-        }
-
-        .nav-menu a:hover {
-            opacity: 0.8;
-        }
-
-        /* Search Bar */
-        .search-container {
-            background: rgba(255,255,255,0.1);
-            margin: 1rem 0;
-            padding: 1rem;
-            border-radius: 50px;
-            backdrop-filter: blur(10px);
-        }
-
-        .search-box {
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto;
-            display: flex;
-            gap: 10px;
-        }
-
-        .search-input {
-            flex: 1;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 25px;
-            font-size: 16px;
-            outline: none;
-        }
-
-        .search-btn {
-            padding: 12px 24px;
-            background: #ff6b6b;
-            color: white;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-
-        .search-btn:hover {
-            background: #ff5252;
-            transform: translateY(-2px);
-        }
-
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 4rem 0;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            margin-bottom: 3rem;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            font-weight: 300;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Categories */
-        .categories {
-            padding: 3rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #333;
-        }
-
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-bottom: 4rem;
-        }
-
-        .category {
-            background: white;
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .category:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-
-        .category h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #667eea;
-        }
-
-        /* Products */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 4rem;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-            position: relative;
-        }
-
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-
-        .product-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            background: #f0f0f0;
-        }
-
-        .product-info {
-            padding: 1.5rem;
-        }
-
-        .product-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            color: #333;
-        }
-
-        .product-desc {
-            color: #666;
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-        }
-
-        .buy-btn {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 1rem;
-        }
-
-        .buy-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(255,107,107,0.3);
-        }
-
-        /* Footer */
-        .footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: #ccc;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: white;
-        }
-
-        /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-                gap: 1.5rem;
-            }
-
-            .category-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Search Animation */
-        .search-results {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        .search-results.show {
-            max-height: 500px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Product Site</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5f5f5;
+    }
+    header {
+      background: #222;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    .container {
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 15px;
+      background: #ff6600;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+    .btn:hover {
+      background: #e65c00;
+    }
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <nav class="nav">
-                <div class="logo">🛒 Affiliate Deals</div>
-                <ul class="nav-menu">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#bags">Bags</a></li>
-                    <li><a href="#jewelry">Jewelry</a></li>
-                    <li><a href="#gadgets">Gadgets</a></li>
-                </ul>
-            </nav>
-            <div class="search-container">
-                <div class="search-box">
-                    <input type="text" class="search-input" placeholder="Search products..." id="searchInput">
-                    <button class="search-btn" onclick="searchProducts()">
-                        <i class="fas fa-search"></i> Search
-                    </button>
-                </div>
-            </div>
-        </div>
-    </header>
 
-    <!-- Hero -->
-    <section class="hero" id="home">
-        <div class="container">
-            <h1>Discover Amazing Deals</h1>
-            <p>Find the best products across all categories with exclusive Amazon deals. Quality products at unbeatable prices!</p>
-        </div>
-    </section>
+<header>
+  <h1>Best Products Deals</h1>
+  <p>Top picks just for you</p>
+</header>
 
-    <!-- Categories -->
-    <section class="categories" id="categories">
-        <div class="container">
-            <h2 class="section-title">Shop by Category</h2>
-            <div class="category-grid">
-                <div class="category" onclick="filterCategory('bags')">
-                    <i class="fas fa-shopping-bag" style="font-size: 3rem; color: #ff6b6b; margin-bottom: 1rem; display: block;"></i>
-                    <h3>Bags</h3>
-                    <p>Stylish backpacks, handbags & more</p>
-                </div>
-                <div class="category" onclick="filterCategory('jewelry')">
-                    <i class="fas fa-gem" style="font-size: 3rem; color: #ffd93d; margin-bottom: 1rem; display: block;"></i>
-                    <h3>Jewelry</h3>
-                    <p>Elegant necklaces, earrings & watches</p>
-                </div>
-                <div class="category" onclick="filterCategory('gadgets')">
-                    <i class="fas fa-mobile-alt" style="font-size: 3rem; color: #4ecdc4; margin-bottom: 1rem; display: block;"></i>
-                    <h3>Gadgets</h3>
-                    <p>Latest tech accessories & tools</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="container">
 
-    <!-- Products -->
-    <section class="products" id="products">
-        <div class="container">
-            <h2 class="section-title">Featured Products</h2>
-            <div class="search-results" id="searchResults"></div>
-            <div class="products-grid" id="productsGrid">
-                <!-- Bags Products -->
-                <div class="product-card" data-category="bags">
-                    <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=200&fit=crop" alt="Backpack" class="product-image">
-                    <div class="product-info">
-                        <h3 class="product-title">Travel Backpack 40L</h3>
-                        <p class="product-desc">Waterproof, durable backpack perfect for travel and daily use.</p>
-                        <button class="buy-btn" onclick="buyProduct('https://amazon.com/backpack-placeholder')">
-                            <i class="fab fa-amazon"></i> Buy on Amazon
-                        </button>
-                    </div>
-                </div>
+  <div class="card">
+    <img src="https://via.placeholder.com/300" alt="Product">
+    <h2>Product Name</h2>
+    <p>Short description of the product.</p>
+    <a class="btn" href="#" target="_blank">Buy Now</a>
+  </div>
 
-                <div class="product-card" data-category="bags">
-                    <img src="https://images.unsplash.com/photo-1551782450-17145d271aa5?w=400&h=200&fit=crop" alt="Tote Bag" class="product-image">
-                    <div class="product-info">
-                        <h3 class="product-title">Canvas Tote Bag</h3>
-                        <p class="product-desc">Eco-friendly tote bag with multiple compartments.</p>
-                        <button class="buy-btn" onclick="buyProduct('https://amazon.com/tote-placeholder')">
-                            <i class="fab fa-amazon"></i> Buy on Amazon
-                        </button>
-                    </div>
-                </div>
+  <div class="card">
+    <img src="https://via.placeholder.com/300" alt="Product">
+    <h2>Another Product</h2>
+    <p>Another short description.</p>
+    <a class="btn" href="#" target="_blank">Buy Now</a>
+  </div>
 
-                <div class="product-card" data-category="bags">
-                    <img src="https://images.unsplash.com/photo-1581235684518-842f5ae850f8?w=400&h=200&fit=crop" alt="Laptop Bag" class="product-image">
-                    <div class="product-info">
-                        <h3 class="product-title">Laptop Messenger Bag</h3>
-                        <p class="product-desc">Professional laptop bag with padded sleeve.</p>
-                        <button class="buy-btn" onclick="buyProduct('https://amazon.com/laptopbag-placeholder')">
-                            <i class="fab fa-amazon"></i> Buy on Amazon
-                        </button>
-                    </div>
-                </div>
+</div>
 
-                <div class="product-card" data-category="bags">
-                    <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=200&fit=crop" alt="Duffel Bag" class="product-image">
-                    <div class="product-info">
-                        <h3 class="product-title">Gym Duffel Bag</h3>
-                        <p class="product-desc">Spacious gym bag with shoe compartment.</p>
-                        <button class="buy-btn" onclick="buyProduct('https://amazon.com/duffel-placeholder')">
-                            <i class="fab fa-amazon"></i> Buy on Amazon
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Jewelry Products -->
-                <div class="product-card" data-category="jewelry">
-                    <img src="https://images.unsplash.com/photo-1524592094714-0f25c5025c32?w=400&h=200&fit=crop" alt="Necklace" class="product-image">
-                    <div class="product-info">
-                        <h3 class="product-title">Gold Layered Necklace</h3>
-                        <p class="product-desc">Elegant 18K gold plated necklace set.</p>
-                        <button class="buy-btn" onclick="buyProduct('https://amazon.com/necklace-placeholder')">
-                            <i class="fab fa-amazon"></i> Buy on Amazon
-                        </button>
-                    </div>
-                </div>
-
-                <div class="product-card" data-category="jewelry">
-                    <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=400&h=200&fit=crop" alt="Earrings" class="product-image">
-                    <div class="product-info">
-                        <h3 class="product-title">Hoop Earrings Set</h3>
-                        <p class="product-desc">Versatile gold hoop earrings for every occasion.</p>
-                        <button class="buy-btn" onclick="buyProduct('https://amazon.com/hoop-placeholder')">
-                            <i class="fab fa-amazon"></i> Buy on Amazon
-                        </button>
-                    </div>
-                </div>
-
-                <div class="product-card" data-category="jewelry">
-                    <img src="https://images.unsplash.com/photo-1574169208507-84376144848b?w=400&h=200&fit=crop" alt="Bracelet" class="product-image">
-                    <div class="product-info">
-                        <h3 class="product-title">Charm Bracelet</h3>
-                        <p class="product-desc">Customizable charm bracelet with 20+ charms.</p>
-                        <button class="buy-btn" onclick="buyProduct('https://amazon.com/bracelet-placeholder')">
-                            <i class="fab fa-amazon"></i> Buy on Amazon
-                        </button>
-                    </div>
-                </div>
-
-                <div class="product-card" data-category="jewelry">
-                    <img src="https://images.unsplash.com/photo-1449753178867-2828233d1f81?w=400&h=200&fit=crop" alt="Watch" class="product-image">
-                    <div class="product-info">
-                        <h3 class="product-title">Minimalist Watch</h3>
-                        <p class="product-desc">Classic stainless steel watch for men & women.</p>
-                        <button class="buy-btn" onclick="buyProduct('https://amazon.com/watch-placeholder')">
-                            <i class="fab fa-amazon"></i> Buy on Amazon
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Gadgets Products -->
-                <div class="product-card" data-category="gadgets">
-                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=200&fit=crop" alt="Wireless Charger" class="product-image">
-                    <div class="product-info">
-                        <h3 class="product-title">Wireless Charger Pad</h3>
-                        <p class="product-desc">Fast wireless charging for iPhone, Samsung & more.</p>
-                        <button class="buy-btn" onclick="buyProduct('https://amazon.com/charger-placeholder')">
-                            <i class="fab fa-amazon"></i> Buy on Amazon
-                        </button>
-                    </div>
-                </div>
-
-                <div class="product-card" data-category="gadgets">
-                    <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&h=200&fit=crop" alt="Earphones" class="product-image">
-                    <div class="product-info">
-                        <h3 class="product-title">True Wireless Earbuds</h3>
-                        <p class="product-desc">20hr battery life with noise cancellation.</p>
-                        <button class="buy-btn" onclick="buyProduct('https://amazon.com/earbuds-placeholder')">
-                            <i class="fab fa-amazon"></i> Buy on Amazon
-                        </button>
-                    </div>
-                </div>
-
-                <div class="product-card" data-category="gadgets">
-                    <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=400&h=200&fit=crop" alt="Power Bank" class="product-image">
-                    <div class="product-info">
-                        <h3 class="product-title">20000mAh Power Bank</h3>
-                        <p class="product-desc">High-capacity power bank with fast charging.</p>
-                        <button class="buy-btn" onclick="buyProduct('https://amazon.com/power
+</body>
+</html>
